@@ -8,11 +8,11 @@
 
 ## **INTRODUCTION**
 
-This repository contains the **JAX implementation** of **STATM-SAVi**, primarily demonstrating training results on the [MOVi dataset](https://console.cloud.google.com/storage/browser/kubric-public/tfds?pli=1&inv=1&invt=Abyp-w).
+This repository contains the **JAX implementation** of **STATM-SAVi**, primarily demonstrating training results on the [MOVi datasets](https://console.cloud.google.com/storage/browser/kubric-public/tfds?pli=1&inv=1&invt=Abyp-w).
 
 ---
 
-## **INSTALLATION & TRAINING**
+### **Installation & Training**
 
 > ⚠️ **Note:** This project provides **two environments**:
 >
@@ -33,3 +33,28 @@ To train the smallest **STATM-SAVi** model on the [MOVi-A dataset](https://githu
 ```bash
 python -m savi.main --config savi/configs/movi/savi_conditional_small.py --workdir samll_temp/
 ```
+
+We recommend using **Environment 2** if you plan to train your own models, as it is compatible with a wider range of GPUs and CUDA versions.
+
+
+### **Pre-trained Weight**
+
+We provide all pre-trained weights for **STATM-SAVi (small)** and **STATM-SAVi++ (batch size 32, 100k steps)** on on the MOVi datasets trained under **Environment 1** [here]().
+
+We also provide**STATM-SAVi++ (batch size 64, 500k steps)** on both MOVi-A and MOVi-D trained under **Environment 2** [here]().
+
+> ⚠️ **Important Note:**  
+> The weights trained under **Environment 1** and **Environment 2** are **not interchangeable**, due to differences in **JAX versions** required by different GPUs.  
+> For example, loading weights across environments may cause errors such as `****`.  
+> Please ensure you switch to the correct environment before loading and evaluating pre-trained weights.
+
+###  Performance Tip: Replace For-Loop with `nn.scan`
+
+In our current implementation, temporal steps `t` are processed using a standard Python `for` loop.  
+To achieve significantly faster training and inference speeds, we recommend replacing the loop in `video.py` (lines 5 to 7) with a Flax `nn.scan`-based recurrent module.
+
+You can refer to the [`slot-attention-video`](https://github.com/google-research/slot-attention-video/blob/main/savi/modules/video.py) implementation for a practical example of how to wrap recurrent modules using `nn.scan`.
+
+### **Acknowledgement**
+We sincerely thank [slot-attention-video](https://github.com/google-research/slot-attention-video) for open-sourcing their codebase. Our work is primarily built upon their implementation with several key improvements.
+
