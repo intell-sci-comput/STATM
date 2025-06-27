@@ -210,10 +210,10 @@ def main(argv):
     target_step = 101
     # statm-savi small
     # config = small_config.get_config()
-    # workdir = '/mnt2/lijian/code_latest_version/slot-attention-video/small_block2_movi_c'
+    # workdir = 'mnt/small_block2_movi_b'
     # statm-savi++
     config = savi_config.get_config()
-    workdir = '/home/lijian/code/slot-att-github/block2_movi_a_500k_bt64_98.3'
+    workdir = 'mnt/statm_savi++_block2_movi_a'
 
     # unconditional
     # config = unconditional_config.get_config()
