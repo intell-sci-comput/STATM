@@ -104,7 +104,8 @@ def evaluate(model, state, eval_ds, loss_fn_eval, eval_metrics_cls, config, root
 
 
 def train_and_evaluate(config: ml_collections.ConfigDict,
-                       workdir: str):
+                       workdir: str,
+                       target_step: int = 101):
     """Runs a training and evaluation loop.
 
   Args:
@@ -171,9 +172,13 @@ def train_and_evaluate(config: ml_collections.ConfigDict,
         losses.compute_full_loss, loss_config=config.losses)
 
     # load checkpoint if exists
-    checkpoint_dir = os.path.join(workdir, "checkpoints")
+    checkpoint_dir = os.path.join(workdir, "checkpoints-0")
     ckpt = checkpoint.MultihostCheckpoint(checkpoint_dir)
-    state = ckpt.restore_or_initialize(state)
+    # state = ckpt.restore_or_initialize(state)
+    
+    target_step = target_step
+    target_ckpt_path = os.path.join(checkpoint_dir, f"ckpt-{target_step}")
+    state = ckpt.restore(state, target_ckpt_path)
 
     # Replicate our parameters.
     state = flax.jax_utils.replicate(state, devices=jax.local_devices())
@@ -202,13 +207,13 @@ def main(argv):
     # Hide any GPUs from TensorFlow. Otherwise TF might reserve memory and make
     # it unavailable to JAX.
 
+    target_step = 101
     # statm-savi small
-    config = small_config.get_config()
-    workdir = '/mnt2/lijian/code_latest_version/slot-attention-video/small_block2_movi_c'
-
+    # config = small_config.get_config()
+    # workdir = '/mnt2/lijian/code_latest_version/slot-attention-video/small_block2_movi_c'
     # statm-savi++
-    # config = savi_config.get_config()
-    # workdir = '/mnt2/.../block2_movi_c_500k_bt64'
+    config = savi_config.get_config()
+    workdir = '/home/lijian/code/slot-att-github/block2_movi_a_500k_bt64_98.3'
 
     # unconditional
     # config = unconditional_config.get_config()
@@ -218,7 +223,7 @@ def main(argv):
     logging.info("JAX host: %d / %d", jax.host_id(), jax.host_count())
     logging.info("JAX devices: %r", jax.devices())
 
-    train_and_evaluate(config, workdir)
+    train_and_evaluate(config, workdir,target_step)
 
 
 if __name__ == "__main__":
