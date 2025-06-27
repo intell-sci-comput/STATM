@@ -24,7 +24,7 @@ Use `conda` to create the environment from `environment1.yml`:
 
 ```bash
 conda env create -f environment1.yml
-conda activate statm_A100
+conda activate statm_a100
 ```
 ---
 
