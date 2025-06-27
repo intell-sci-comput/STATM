@@ -60,7 +60,7 @@ def get_config():
 
     config.data = ml_collections.ConfigDict({
         "tfds_name": "movi_a/128x128:1.0.0",  # Dataset for training/eval.
-        "data_dir": "/mnt2/movi",  # Path to the directory where the dataset is stored.
+        "data_dir": "/mnt2/lijian/movi",  # Path to the directory where the dataset is stored.
         "shuffle_buffer_size": config.batch_size * 8,
     })
 
