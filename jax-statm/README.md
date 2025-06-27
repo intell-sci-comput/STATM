@@ -39,9 +39,9 @@ We recommend using **Environment 2** if you plan to train your own models, as it
 
 ### **Pre-trained Weight**
 
-We provide all pre-trained weights for **STATM-SAVi (small)** and **STATM-SAVi++ (batch size 32, 100k steps)** on on the MOVi datasets trained under **Environment 1** [here]().
+We provide all pre-trained weights for **STATM-SAVi (small)** and **STATM-SAVi++ (batch size 32)** on on the MOVi datasets trained under **Environment 1** [here](https://huggingface.co/Kang-na/STATM).
 
-We also provide**STATM-SAVi++ (batch size 64, 500k steps)** on both MOVi-A and MOVi-D trained under **Environment 2** [here]().
+We also provide pre-trained weights for **STATM-SAVi++ (batch size 64)**  trained under **Environment 2** [here](https://huggingface.co/Kang-na/STATM).
 
 > ⚠️ **Important Note:**  
 > The weights trained under **Environment 1** and **Environment 2** are **not interchangeable**, due to differences in **JAX versions** required by different GPUs.  
