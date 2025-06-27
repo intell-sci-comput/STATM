@@ -24,7 +24,7 @@ Use `conda` to create the environment from `environment1.yml`:
 
 ```bash
 conda env create -f environment1.yml
-conda activate jax_statm
+conda activate statm_A100
 ```
 ---
 
@@ -45,13 +45,13 @@ We also provide**STATM-SAVi++ (batch size 64, 500k steps)** on both MOVi-A and M
 
 > ⚠️ **Important Note:**  
 > The weights trained under **Environment 1** and **Environment 2** are **not interchangeable**, due to differences in **JAX versions** required by different GPUs.  
-> For example, loading weights across environments may cause errors such as `****`.  
+> For example, loading weights across environments may cause errors such as `flax.errors.ScopeParamShapeError: Inconsistent shapes between value and initializer for parameter "scale" in "/vmap(FrameEncoder_0)/ResNet_0/init_bn": (64,), (1, 1, 1, 64).`.  
 > Please ensure you switch to the correct environment before loading and evaluating pre-trained weights.
 
 ###  Performance Tip: Replace For-Loop with `nn.scan`
 
 In our current implementation, temporal steps `t` are processed using a standard Python `for` loop.  
-To achieve significantly faster training and inference speeds, we recommend replacing the loop in `video.py` (lines 5 to 7) with a Flax `nn.scan`-based recurrent module.
+To achieve significantly faster training and inference speeds, we recommend replacing the loop in `video.py` (lines 90 to 110) with a Flax `nn.scan`-based recurrent module.
 
 You can refer to the [`slot-attention-video`](https://github.com/google-research/slot-attention-video/blob/main/savi/modules/video.py) implementation for a practical example of how to wrap recurrent modules using `nn.scan`.
 
