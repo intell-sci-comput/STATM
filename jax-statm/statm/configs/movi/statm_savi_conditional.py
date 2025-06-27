@@ -151,7 +151,7 @@ def get_config():
 
         # Predictor.
         "predictor": ml_collections.ConfigDict({
-            "module": "statm.modules.TransformerBlock",
+            "module": "statm.modules.TimeSpaceTransformerBlock2",
             "num_heads": 4,
             "qkv_size": 256,
             "mlp_size": 1024
