@@ -28,7 +28,7 @@ conda activate statm_a100
 ```
 ---
 
-To train the smallest **STATM-SAVi** model on the [MOVi-A dataset](https://github.com/google-research/kubric/blob/main/challenges/movi/README.md):
+To train the smallest **STATM-SAVi** model on the [MOVi-A dataset](https://github.com/google-research/kubric/blob/main/challenges/movi/README.md) using A100 GPUs.:
 
 ```bash
 CUDA_VISIBLE_DEVICES=6,7 python -m statm.main --config statm/configs/movi/statm_savi_conditional_small.py --workdir test/
