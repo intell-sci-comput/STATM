@@ -217,7 +217,7 @@ def main(argv):
 
     # unconditional
     # config = unconditional_config.get_config()
-    # workdir = '/home/lijian/code/slot-attention-video/block2_movi_c_just_video_200k'
+    # workdir = 'mnt/block2_movi_c_just_video_200k'
 
 
     logging.info("JAX host: %d / %d", jax.host_id(), jax.host_count())
