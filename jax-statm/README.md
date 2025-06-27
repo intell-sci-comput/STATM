@@ -31,7 +31,7 @@ conda activate statm_a100
 To train the smallest **STATM-SAVi** model on the [MOVi-A dataset](https://github.com/google-research/kubric/blob/main/challenges/movi/README.md):
 
 ```bash
-python -m savi.main --config savi/configs/movi/savi_conditional_small.py --workdir samll_temp/
+CUDA_VISIBLE_DEVICES=6,7 python -m statm.main --config statm/configs/movi/statm_savi_conditional_small.py --workdir test/
 ```
 
 We recommend using **Environment 2** if you plan to train your own models, as it is compatible with a wider range of GPUs and CUDA versions.
